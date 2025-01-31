@@ -24,6 +24,18 @@ public class Boost : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Boost"))
+        {
+            if (_isboosting == false)
+            {
+                StartCoroutine(Boostspeed());
+            }
+        }
+        
+    }
+
     public IEnumerator Boostspeed()
     {
         _isboosting=true;
