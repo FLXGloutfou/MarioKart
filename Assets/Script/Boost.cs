@@ -35,7 +35,10 @@ public class Boost : MonoBehaviour
         }
         
     }
-
+    public void ItemBoost()
+    {
+        StartCoroutine(Boostspeed());
+    }
     public IEnumerator Boostspeed()
     {
         _isboosting=true;

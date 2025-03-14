@@ -4,6 +4,8 @@ using UnityEngine.UIElements;
 
 public class CarControler : MonoBehaviour
 {
+    [SerializeField]
+    private LayerMask _layerMask;
 
     [SerializeField]
     private Rigidbody _rb;
@@ -12,20 +14,17 @@ public class CarControler : MonoBehaviour
     [SerializeField]
     private float _accelerationFactor, _rotationSpeed = 0.5f;
     private bool _isAccelerating;
+    private float _terrainSpeedVariator;
 
     public float speedMax = 3;
 
     [SerializeField]
     private AnimationCurve _accelerationCurve;
 
-    void Start()
-    {
-
-    }
-
     void Update()
     {
         rotationInput = Input.GetAxis("Horizontal");
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             _isAccelerating = true;
@@ -35,17 +34,23 @@ public class CarControler : MonoBehaviour
             _isAccelerating = false;
         }
 
+        if (Physics.Raycast(transform.position, transform.up * -1, out var info, 1, _layerMask))
+        {
 
-        //var xAngle = transform.eulerAngles.x;
-        //if (xAngle>180)
-        //{
-        //    xAngle = Mathf.Clamp(transform.eulerAngles.x, 0, 40);
-        //    xAngle -= 360;
-        //}
-
-        //var yAngle = transform.eulerAngles.y;
-        //var zAngle = 0;
-        //transform.eulerAngles = new Vector3(xAngle,yAngle,zAngle);
+            Terrain terrainBellow = info.transform.GetComponent<Terrain>();
+            if (terrainBellow != null)
+            {
+                _terrainSpeedVariator = terrainBellow.speedVariator;
+            }
+            else
+            {
+                _terrainSpeedVariator = 1;
+            }
+        }
+        else
+        {
+            _terrainSpeedVariator = 1;
+        }
     }
 
     private void FixedUpdate()
@@ -61,6 +66,8 @@ public class CarControler : MonoBehaviour
         }
 
         _accelerationLerpInterpolator = Mathf.Clamp01(_accelerationLerpInterpolator);
+
+
 
         _speed = _accelerationCurve.Evaluate(_accelerationLerpInterpolator) * speedMax;
 
