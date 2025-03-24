@@ -6,23 +6,27 @@ public class CarControler : MonoBehaviour
 {
     [SerializeField]
     private LayerMask _layerMask;
+    [SerializeField]
+    private LayerMask _wallLayer;
 
     [SerializeField]
     private Rigidbody _rb;
 
     private float _speed, _accelerationLerpInterpolator,rotationInput;
     [SerializeField]
-    private float _accelerationFactor, _rotationSpeed = 0.5f;
+    private float _accelerationFactor, _rotationSpeed = 1f;
     private bool _isAccelerating;
     private float _terrainSpeedVariator;
 
     public float speedMax = 3;
+    private float _currentSpeedMax;
 
     [SerializeField]
     private AnimationCurve _accelerationCurve;
 
     void Update()
     {
+        _currentSpeedMax = speedMax ;
         rotationInput = Input.GetAxis("Horizontal");
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -34,10 +38,10 @@ public class CarControler : MonoBehaviour
             _isAccelerating = false;
         }
 
-        if (Physics.Raycast(transform.position, transform.up * -1, out var info, 1, _layerMask))
+        if (Physics.Raycast(transform.position, Vector3.down, out var info, 10, _layerMask))
         {
 
-            Terrain terrainBellow = info.transform.GetComponent<Terrain>();
+            Terrain terrainBellow = info.collider.GetComponent<Terrain>();
             if (terrainBellow != null)
             {
                 _terrainSpeedVariator = terrainBellow.speedVariator;
@@ -51,6 +55,18 @@ public class CarControler : MonoBehaviour
         {
             _terrainSpeedVariator = 1;
         }
+
+        Debug.DrawRay(transform.position, transform.forward, Color.red, 2f);
+        if (Physics.Raycast(transform.position, transform.forward, out var wall, 2, _wallLayer))
+        {
+            Debug.Log("ouaiggros");
+            speedMax = 0;
+        }
+        else
+        {
+            speedMax = _currentSpeedMax;
+        }
+
     }
 
     private void FixedUpdate()
@@ -69,7 +85,7 @@ public class CarControler : MonoBehaviour
 
 
 
-        _speed = _accelerationCurve.Evaluate(_accelerationLerpInterpolator) * speedMax;
+        _speed = _accelerationCurve.Evaluate(_accelerationLerpInterpolator) * speedMax * _terrainSpeedVariator ;
 
         transform.eulerAngles += Vector3.up * _rotationSpeed * Time.deltaTime*rotationInput;
 

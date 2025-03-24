@@ -6,7 +6,7 @@ public class Boost : MonoBehaviour
 {
     public CarControler carcontroler;
     private float _currentspeed;
-    private int _speedboost = 3 ;
+    private int _speedboost = 2 ;
     private bool _isboosting = false;
 
     private void Start()

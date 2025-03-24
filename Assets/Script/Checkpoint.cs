@@ -1,9 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-
-public class Chekpoint : MonoBehaviour
+public class CheckPoint : MonoBehaviour
 {
+    public bool isFinishLine;
 
+    private void OnTriggerEnter(Collider other)
+    {
+        var otherLapManager = other.GetComponent<LapManager>();
+        if (otherLapManager != null)
+        {
+            otherLapManager.AddCheckPoint(this);
+            Debug.Log("checkpoint");
+        }
+    }
 }
