@@ -13,16 +13,7 @@ public class Boost : MonoBehaviour
     {
         _currentspeed = carcontroler.speedMax;
     }
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.LeftAlt))
-        {
-           if (_isboosting==false)
-            {
-                StartCoroutine(Boostspeed());
-            }
-        }
-    }
+ 
 
     private void OnTriggerEnter(Collider other)
     {
@@ -41,6 +32,7 @@ public class Boost : MonoBehaviour
     }
     public IEnumerator Boostspeed()
     {
+
         _isboosting=true;
         carcontroler.speedMax = carcontroler.speedMax * _speedboost;
         yield return new WaitForSeconds(1f);

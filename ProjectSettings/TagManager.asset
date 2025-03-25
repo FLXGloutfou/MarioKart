@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Boost
   - Wall
+  - Coin
   layers:
   - Default
   - TransparentFX

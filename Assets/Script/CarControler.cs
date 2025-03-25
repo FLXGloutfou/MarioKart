@@ -18,7 +18,7 @@ public class CarControler : MonoBehaviour
     private bool _isAccelerating;
     private float _terrainSpeedVariator;
 
-    public float speedMax = 3;
+    public float speedMax = 3,coinSpeed;
     private float _currentSpeedMax;
 
     [SerializeField]
@@ -56,10 +56,8 @@ public class CarControler : MonoBehaviour
             _terrainSpeedVariator = 1;
         }
 
-        Debug.DrawRay(transform.position, transform.forward, Color.red, 2f);
-        if (Physics.Raycast(transform.position, transform.forward, out var wall, 2, _wallLayer))
+        if (Physics.Raycast(transform.position, transform.forward, out var wall, 1, _wallLayer))
         {
-            Debug.Log("ouaiggros");
             speedMax = 0;
         }
         else
@@ -85,7 +83,7 @@ public class CarControler : MonoBehaviour
 
 
 
-        _speed = _accelerationCurve.Evaluate(_accelerationLerpInterpolator) * speedMax * _terrainSpeedVariator ;
+        _speed = _accelerationCurve.Evaluate(_accelerationLerpInterpolator) * speedMax * (1 + coinSpeed) * _terrainSpeedVariator ;
 
         transform.eulerAngles += Vector3.up * _rotationSpeed * Time.deltaTime*rotationInput;
 

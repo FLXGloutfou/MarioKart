@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class LapManager : MonoBehaviour
 {
-    private int _lapNumber;
+    public UIManager uiManager;
+
+    public int _lapNumber;
     private List<CheckPoint> _checkpoints;
     private int _numberOfCheckpoints;
 
@@ -33,8 +35,8 @@ public class LapManager : MonoBehaviour
     {
         if (_checkpoints.Count > _numberOfCheckpoints / 2)
         {
+            StartCoroutine(uiManager.UpdateLapUi());
             _lapNumber++;
-            Debug.Log("Tour Fini, on entre dans le tour " + _lapNumber);
             _checkpoints.Clear();
             if (_lapNumber >= 3)
             {
