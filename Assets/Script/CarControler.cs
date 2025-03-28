@@ -12,13 +12,13 @@ public class CarControler : MonoBehaviour
     [SerializeField]
     private Rigidbody _rb;
 
-    private float _speed, _accelerationLerpInterpolator,rotationInput;
+    private float _speed, _accelerationLerpInterpolator, rotationInput;
     [SerializeField]
     private float _accelerationFactor, _rotationSpeed = 1f;
     private bool _isAccelerating;
     private float _terrainSpeedVariator;
 
-    public float speedMax = 3,coinSpeed;
+    public float speedMax = 3, coinSpeed;
     private float _currentSpeedMax;
 
     [SerializeField]
@@ -26,7 +26,7 @@ public class CarControler : MonoBehaviour
 
     void Update()
     {
-        _currentSpeedMax = speedMax ;
+        _currentSpeedMax = speedMax;
         rotationInput = Input.GetAxis("Horizontal");
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -83,9 +83,9 @@ public class CarControler : MonoBehaviour
 
 
 
-        _speed = _accelerationCurve.Evaluate(_accelerationLerpInterpolator) * speedMax * (1 + coinSpeed) * _terrainSpeedVariator ;
+        _speed = _accelerationCurve.Evaluate(_accelerationLerpInterpolator) * speedMax * (1 + coinSpeed) * _terrainSpeedVariator;
 
-        transform.eulerAngles += Vector3.up * _rotationSpeed * Time.deltaTime*rotationInput;
+        transform.eulerAngles += Vector3.up * _rotationSpeed * Time.deltaTime * rotationInput;
 
 
         _rb.MovePosition(transform.position + transform.forward * _speed * Time.fixedDeltaTime);

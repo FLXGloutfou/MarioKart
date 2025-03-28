@@ -8,12 +8,16 @@ public class UIManager : MonoBehaviour
     public CarControler carcontroler;
     public LapManager lapmanager;
     public CoinManager coinmanager;
+    public PlayerItemManager playeritemmanager;
 
     public GameObject newLapPanel;
 
     public Text playerPlaceUI;
     public Text coinCountUI;
     public Text lapCountUI;
+
+    public Text UseitemCount;
+    public Image ItemImage;
 
 
     public IEnumerator UpdateLapUi()
@@ -29,4 +33,5 @@ public class UIManager : MonoBehaviour
     {
         coinCountUI.text = coinmanager.coinCount.ToString();
     }
+
 }

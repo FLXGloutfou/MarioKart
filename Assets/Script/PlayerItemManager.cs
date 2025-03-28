@@ -17,6 +17,7 @@ public class PlayerItemManager : MonoBehaviour
     private int _numberOfItemUse;
 
     public Boost boost;
+    public CoinManager coinManager;
 
 
     private void Update()

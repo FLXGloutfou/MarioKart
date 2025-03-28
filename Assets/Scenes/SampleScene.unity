@@ -1666,6 +1666,7 @@ GameObject:
   - component: {fileID: 262627096}
   - component: {fileID: 262627095}
   - component: {fileID: 262627094}
+  - component: {fileID: 262627098}
   m_Layer: 0
   m_Name: TRACK
   m_TagString: Untagged
@@ -1760,6 +1761,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &262627098
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 262627093}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 10, y: 2.220446e-16, z: 10}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &299403421
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4646,10 +4668,13 @@ MonoBehaviour:
   carcontroler: {fileID: 681050255}
   lapmanager: {fileID: 681050258}
   coinmanager: {fileID: 681050259}
+  playeritemmanager: {fileID: 0}
   newLapPanel: {fileID: 130534215}
   playerPlaceUI: {fileID: 388217993}
   coinCountUI: {fileID: 732617201}
   lapCountUI: {fileID: 481457639}
+  UseitemCount: {fileID: 0}
+  ItemImage: {fileID: 0}
 --- !u!114 &665166348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5109,11 +5134,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemList:
+  - {fileID: 11400000, guid: 1ae9c9abf53d4ed4f8a45fc2fa21cd47, type: 2}
+  - {fileID: 11400000, guid: 20c50a6ec2d8ea64cb3e13839d1c0c8b, type: 2}
+  - {fileID: 11400000, guid: f62cf8e957f5feb43b67685cb88b0246, type: 2}
   - {fileID: 11400000, guid: 7f808b9f457b63849abd53966775365a, type: 2}
   _currentItem: {fileID: 0}
-  _itemImage: {fileID: 0}
+  _itemImage: {fileID: 1790673607}
   _numberOfItemUse: 0
-  boost: {fileID: 0}
+  boost: {fileID: 681050257}
+  coinManager: {fileID: 681050259}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -5380,7 +5409,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 1
+  m_Text: '
+
+'
 --- !u!222 &732617202
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5659,7 +5690,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 70, y: -150}
+  m_AnchoredPosition: {x: 70, y: -170}
   m_SizeDelta: {x: 320, y: 80}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &780654574
@@ -6229,6 +6260,16 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 548356811162821281, guid: 133ad4233e1dcb44aa3df20073354358, type: 3}
   m_PrefabInstance: {fileID: 425131342}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &902049656 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 8614055137994402778, guid: 9a123bedfd95ab24a82bf758d101a460, type: 3}
+  m_PrefabInstance: {fileID: 5522509751056649114}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &902049657 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 7902774302572265428, guid: 9a123bedfd95ab24a82bf758d101a460, type: 3}
+  m_PrefabInstance: {fileID: 5522509751056649114}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &963194225
 GameObject:
@@ -9910,7 +9951,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 70, y: -240}
+  m_AnchoredPosition: {x: 70, y: -300}
   m_SizeDelta: {x: 320, y: 80}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1744319118
@@ -12166,6 +12207,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5814640309072484855, guid: 9a123bedfd95ab24a82bf758d101a460, type: 3}
+      propertyPath: _text
+      value: 
+      objectReference: {fileID: 902049657}
+    - target: {fileID: 5814640309072484855, guid: 9a123bedfd95ab24a82bf758d101a460, type: 3}
+      propertyPath: _collider
+      value: 
+      objectReference: {fileID: 902049656}
+    - target: {fileID: 5814640309072484855, guid: 9a123bedfd95ab24a82bf758d101a460, type: 3}
+      propertyPath: _meshRenderer
+      value: 
+      objectReference: {fileID: 902049657}
     - target: {fileID: 8551411190772276737, guid: 9a123bedfd95ab24a82bf758d101a460, type: 3}
       propertyPath: m_Name
       value: ItemBox

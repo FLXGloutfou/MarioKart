@@ -18,14 +18,38 @@ public class CoinManager : MonoBehaviour
         if (other.CompareTag("Coin"))
         {
             if (coinCount < 10)
+            {
+                coinCount++;
+                carcontroler.coinSpeed = coinCount * 0.03f;
+                uimanager.UpdateCoinCount();
+                Destroy(other.gameObject);
+            }
+            
+        }
+
+    }
+
+    public void Addcoin()
+    {
+        if (coinCount < 10)
+        {
             coinCount++;
             carcontroler.coinSpeed = coinCount * 0.03f;
             uimanager.UpdateCoinCount();
-            Destroy(other.gameObject);
         }
+    }
 
-        
-
+    public void RemoveCoins()
+    {
+        if (coinCount <= 5)
+        {
+            coinCount = 0;
+        }
+        else
+        {
+            coinCount = coinCount - 5;
+        }
+        uimanager.UpdateCoinCount();
     }
 
 }
