@@ -4,6 +4,11 @@ using UnityEngine.UIElements;
 
 public class CarControler : MonoBehaviour
 {
+
+    //Mapping
+    [SerializeField]
+    private string _accelerateInput, _directionalInput;
+
     [SerializeField]
     private LayerMask _layerMask;
     [SerializeField]
@@ -27,16 +32,10 @@ public class CarControler : MonoBehaviour
     void Update()
     {
         _currentSpeedMax = speedMax;
-        rotationInput = Input.GetAxis("Horizontal");
+        rotationInput = Input.GetAxis(_directionalInput);
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            _isAccelerating = true;
-        }
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            _isAccelerating = false;
-        }
+        float accelerationInput = Input.GetAxis(_accelerateInput);
+        _isAccelerating = accelerationInput > 0f;
 
         if (Physics.Raycast(transform.position, Vector3.down, out var info, 10, _layerMask))
         {

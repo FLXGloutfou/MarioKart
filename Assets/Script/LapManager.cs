@@ -10,9 +10,13 @@ public class LapManager : MonoBehaviour
     private List<CheckPoint> _checkpoints;
     private int _numberOfCheckpoints;
 
+    private int _currentplace,_numberckepointpass;
+
+
 
     private void Start()
     {
+        _numberckepointpass = 0;
         _numberOfCheckpoints = FindObjectsByType<CheckPoint>(FindObjectsSortMode.None).Length;
         _checkpoints = new List<CheckPoint>();
 

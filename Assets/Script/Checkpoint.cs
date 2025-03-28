@@ -10,7 +10,6 @@ public class CheckPoint : MonoBehaviour
         if (otherLapManager != null)
         {
             otherLapManager.AddCheckPoint(this);
-            Debug.Log("checkpoint");
         }
     }
 }
